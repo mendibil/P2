@@ -22,6 +22,8 @@ typedef struct {
   int frames_in_maybe_v;
   int frames_in_maybe_s;
   int frames_in_init;
+  int frames_in_s;
+  int frames_in_v;
 } VAD_DATA;
 
 /* Call this function before using VAD: 
