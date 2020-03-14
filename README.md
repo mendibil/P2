@@ -175,7 +175,7 @@ Ejercicios
   el resumen).
   
   Como podemos observar, hemos obtenido un resultado `TOTAL` de las medidas-F de **XX.XXX%**, lo cual puede ser considerado
-  como un resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el wavesurfer los 
+  como un resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el `wavesurfer` los 
   labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
   
   (foto1)
