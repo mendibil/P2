@@ -110,7 +110,7 @@ Ejercicios
       	  Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
       		
 		+ -42 dB en silencio.
-		+ -29.9 dB en consonantes fricativas /s/.
+		+ -29.9 dB en consonantes fricativas sordas /s/.
 		+ -25 dB en consonantes sonoras /m/, /n/.
 		+ -20 dB aproximadamente, promediando las estadisticas de fragmentos vocales de todo el audio.
 		
@@ -148,8 +148,8 @@ Ejercicios
   * Tasa de cruces por cero (zcr), para discernir las consonantes fricativas (/s/, /x/).
   * Duración mínima de silencio.
   * Duración mínima de voz.
-  * Duración mínima de maybe silence.
-  * Duración mínima de maybe voice.
+  * Duración máxima de maybe silence.
+  * Duración máxima de maybe voice.
   No hemos tenido en cuenta la amplitud media ya que hemos considerado que, al tener una forma muy parecida a la potencia no
   aportaría demasiado al algoritmo.
   
@@ -196,6 +196,15 @@ Ejercicios
 - Si ha usado `docopt_c` para realizar la gestión de las opciones y argumentos del programa `vad`, inserte
   una captura de pantalla en la que se vea el mensaje de ayuda del programa.
   
+  Lo hemos implementado de tal forma que se puedan gestionar los siguientes parámetros:
+  * Umbral bajo de potencia
+  * Umbral alto de potencia
+  * Umbral de cruces por cero (zcr)
+  * Duración mínima de señal de silencio
+  * Duración mínima de señal de voz
+  * Duración máxima de maybe silence
+  * Duración máxima de maybe voice
+  
   (foto)
 
 
@@ -203,6 +212,35 @@ Ejercicios
 
 - Indique a continuación si ha realizado algún tipo de aportación suplementaria (algoritmos de detección o 
   parámetros alternativos, etc.).
+  
+  Encontrar el valor óptimo de los 7 parámetros que hemos decidido utilizar sería un quebradero de cabeza. Con la finalidad
+  de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de run_vad.sh,
+  asignando cada vez un valores distintos a los parámetros. También modificamos parte del script vad_evaluation.pl para que
+  solamente se imprimiera por pantalla el porcentaje TOTAL, y de esta manera podíamos tenerlo todo mejor organizado.
+  
+  (foto)
+  
+  Al principio, tuvimos un problema y es que, en alguna de las ejecuciones, de manera totalmente aleatoria, daba error al
+  abrir alguno de los ficheros de audio. Este problema es bien conocido por nuestro profesor, y parece que no se conoce muy
+  bien su procedencia.
+  
+  (foto)
+  
+  Una primera solución que ideamos fue la de escribir otro script que ejecutara este primer script
+  contínuamente hasta que diera un resultado exitoso, con la esperanza de que en alguna de las ejecuciones no ocurriría el
+  error aleatorio:
+  
+  (foto)
+  
+  Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma
+  idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a bin/vad y la que llama a vad_evaluation.pl en
+  caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros sino
+  que lo retomábamos desde el sitio donde había surgido el error.
+  
+  (foto)
+  
+  Así pues, conseguimos finalmente una manera de ejecutar en bucle el programa, cambiando automáticamente los parámetros en
+  cada ejecución y sin errores, para poder obtener los valores óptimos de cada parámetro
 
 - Si lo desea, puede realizar también algún comentario acerca de la realización de la práctica que considere
   de interés de cara a su evaluación.
