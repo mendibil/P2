@@ -147,7 +147,7 @@ Ejercicios
   * Sobre el segundo 12" del audio, se puede observar como el etiquetado manual alarga más el fragmento de voz respecto al       VAD. El VAD hace un etiquetado coherente, pero el etiquetado manual se corresponde mejor con la percepión humana ya que     en ese caso, el hablante esta acabando una palabra con la letra /o/, de forma muy suave y, por tanto, con muy poca           potencia.
   * Finalmente, el último fragmento de voz que detecta el VAD, no está etiquetado manualmente. Esto se debe a que ese sonido     es un ruido causado por un golpe en el micrófono. El VAD lo detecta porque sus características estadísticas son             parecidas a las de la voz humana, pero en este caso no es así. 
 
-    Como nuestro VAD tampoco es muy sofisticado, una solución hubiese sido etiquetar este ruido para que se correspondiera       con el resultado automático, pero creemos que estas diferencias son una buena forma de demostrar los fallos fáciles que     puede tener un VAD con estas características.
+  Como nuestro VAD tampoco es muy sofisticado, una solución hubiese sido etiquetar este ruido para que se correspondiera       con el resultado automático, pero creemos que estas diferencias son una buena forma de demostrar los fallos fáciles que     puede tener un VAD con estas características.
   
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
