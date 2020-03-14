@@ -134,14 +134,14 @@ Ejercicios
   
   El código completo se encuentra en esta misma branca del repositorio. En cuanto al algoritmo de detección, hemos sido tan
   fieles a la explicación proporcionada por el profesor como nos ha sido posible. Es decir, hemos implementado la máquina de 
-  estados que viene implementada en las páginas 4, 5, y 6 del archivo p2_vad.pdf.
+  estados que viene implementada en las páginas 4, 5, y 6 del archivo _**p2_vad.pdf**_.
   
   En lo que respecta al nivel de interferencia del ruido de fondo, nuestra elección de diseño consiste en calcularlo a partir
   de la media de las potencias en decibelios de las N primeras tramas, consideradas como estado inicial y en el cual hay
   silencio.
   
   También hemos utilizado dos umbrales de decisión distintos, para conseguir una funcionalidad explicada en la página 7 del 
-  archivo p2_vad.pdf.
+  archivo _**p2_vad.pdf**_.
   
   Las características de la señal que hemos utilizado para implementar nuestro algoritmo son las siguientes:
   * Potencia del tramo de señal, en dB, con dos umbrales distintos.
@@ -174,9 +174,9 @@ Ejercicios
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
   
-  Como podemos observar, hemos obtenido un resultado TOTAL de las medidas-F de XX.XXX%, lo cual puede ser considerado como un
-  resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el wavesurfer los labels
-  generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
+  Como podemos observar, hemos obtenido un resultado `TOTAL` de las medidas-F de **XX.XXX%**, lo cual puede ser considerado
+  como un resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el wavesurfer los 
+  labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
   
   (foto1)
 
@@ -207,13 +207,15 @@ Ejercicios
   
   (foto3)
   
-  Para facilitar la edición del docopt, hicimos un comando que automáticamente realiza todos los pasos necesarios que hay que
-  realizar:
-  rm -r bin
-  rm src/vad.docopt.h
-  meson bin
-  docopt_c/docopt_c.py src/vad.docopt -o src/vad.docopt.h
-  ninja -C bin
+  Para facilitar la edición del `docopt`, hicimos un comando que automáticamente ejecuta todos los pasos necesarios que hay 
+  que realizar:
+  ```.sh
+  	rm -r bin
+	rm src/vad.docopt.h
+	meson bin
+	docopt_c/docopt_c.py src/vad.docopt -o src/vad.docopt.h
+	ninja -C bin
+  ```
 
 
 ### Contribuciones adicionales y/o comentarios acerca de la práctica
@@ -222,9 +224,9 @@ Ejercicios
   parámetros alternativos, etc.).
   
   Encontrar el valor óptimo de los 7 parámetros que hemos decidido utilizar sería un quebradero de cabeza. Con la finalidad
-  de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de run_vad.sh,
-  asignando cada vez un valores distintos a los parámetros. También modificamos parte del script vad_evaluation.pl para que
-  solamente se imprimiera por pantalla el porcentaje TOTAL, y de esta manera podíamos tenerlo todo mejor organizado.
+  de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de `run_vad.sh`,
+  asignando cada vez un valores distintos a los parámetros. También modificamos parte del script `vad_evaluation.pl` para que
+  solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo todo mejor organizado.
   
   (foto4)
   
@@ -241,9 +243,9 @@ Ejercicios
   (foto6)
   
   Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma
-  idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a bin/vad y la que llama a vad_evaluation.pl en
-  caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros sino
-  que lo retomábamos desde el sitio donde había surgido el error.
+  idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a `vad_evaluation.pl`
+  en caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros 
+  sino que lo retomábamos desde el sitio donde había surgido el error.
   
   (foto7)
   
