@@ -178,7 +178,7 @@ Ejercicios
   resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el wavesurfer los labels
   generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
   
-  (foto)
+  (foto1)
 
 
 ### Trabajos de ampliación
@@ -189,7 +189,7 @@ Ejercicios
   la que se vea con claridad la señal antes y después de la cancelación (puede que `wavesurfer` no sea la
   mejor opción para esto, ya que no es capaz de visualizar varias señales al mismo tiempo).
   
-  (foto)
+  (foto2)
 
 #### Gestión de las opciones del programa usando `docopt_c`
 
@@ -205,7 +205,7 @@ Ejercicios
   * Duración máxima de maybe silence
   * Duración máxima de maybe voice
   
-  (foto)
+  (foto3)
 
 
 ### Contribuciones adicionales y/o comentarios acerca de la práctica
@@ -218,26 +218,26 @@ Ejercicios
   asignando cada vez un valores distintos a los parámetros. También modificamos parte del script vad_evaluation.pl para que
   solamente se imprimiera por pantalla el porcentaje TOTAL, y de esta manera podíamos tenerlo todo mejor organizado.
   
-  (foto)
+  (foto4)
   
   Al principio, tuvimos un problema y es que, en alguna de las ejecuciones, de manera totalmente aleatoria, daba error al
   abrir alguno de los ficheros de audio. Este problema es bien conocido por nuestro profesor, y parece que no se conoce muy
   bien su procedencia.
   
-  (foto)
+  (foto5)
   
   Una primera solución que ideamos fue la de escribir otro script que ejecutara este primer script
   contínuamente hasta que diera un resultado exitoso, con la esperanza de que en alguna de las ejecuciones no ocurriría el
   error aleatorio:
   
-  (foto)
+  (foto6)
   
   Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma
   idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a bin/vad y la que llama a vad_evaluation.pl en
   caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros sino
   que lo retomábamos desde el sitio donde había surgido el error.
   
-  (foto)
+  (foto7)
   
   Así pues, conseguimos finalmente una manera de ejecutar en bucle el programa, cambiando automáticamente los parámetros en
   cada ejecución y sin errores, para poder obtener los valores óptimos de cada parámetro
