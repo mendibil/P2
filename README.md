@@ -107,29 +107,48 @@ Ejercicios
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para estar
       seguros de que un segmento de señal se corresponde con voz.
       
-      	Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
-      		+ -42 dB en silencio.
+      	  Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
+      		
+		+ -42 dB en silencio.
 		+ -29.9 dB en consonantes fricativas /s/.
 		+ -25 dB en consonantes sonoras /m/, /n/.
 		+ -20 dB aproximadamente, promediando las estadisticas de fragmentos vocales de todo el audio.
 		
-	Con estos datos, podríamos considerar como un buen incremento de nivel de potencia inicial unos 10 dB.
+	  Con estos datos, podríamos considerar como un buen incremento de nivel de potencia inicial unos 10 dB.
 		
 	* Duración mínima razonable de los segmentos de voz y silencio.
+	
+	  Para la voz, podemos tomar como duración mínima unos 50 ms. Para el silencio, en cambio, podríamos considerar un 	     tiempo menor, de unos 20 ms.
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
+	
+	  La evolución de cruces por cero no resulta muy útil para la detección de voz en general, en cambio, en el caso 	   específico de las consonantes fricativas como /s/ y /x/ si que es una muy buena herramienta.
+	  
+	  Los cruces mantienen un nivel bastante constante con poca varianza, excepto en el caso de las mencionadas 		  fricativas, donde la tasa de cruces por cero se dispara. Estas consonantes son pronunciadas con un nivel de 		  potencia muy bajo, por lo que contar con la información de esta tasa nos es muy útil para no detectar como 		  silencio un fragmento que realmente es de voz.
 
 
 ### Desarrollo del detector de actividad vocal
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
+  
+  El código completo se encuentra en esta misma branca del repositorio.
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
+  
+  <img src="img/manual-vs-vad.jpeg" width="640" align="center">
 
+- Explique, si existen, las discrepancias entre el etiquetado manual y la detección automática.
+  
+  Existen bastantas diferencias ya que el etiquetado manual fue llevado a cabo segun nuestras percepciones subjetivas y la     detección automática se basa en unos cuantos parámetros estadísticos (las etiquetas manuales son las superiores y las       creadas por el VAD son las inferiores).
+  
+  * A partir de la tercera etiqueta, vemos que el VAD detecta un pequeño fragmento de silencio donde nosotros habíamos 	         marcado voz. Esto se debe a que ese fragmento de voz se corresponde a una pausa entre palabras que nosotros no               consideramos como un fragmento de silencio, pero el VAD sí que lo detecta ya que para mejorar la puntuación-F, los           resultados eran mejores considerando una duración mínima menor de los fragmentos de silencio.
+  * Sobre el segundo 12" del audio, se puede observar como el etiquetado manual alarga más el fragmento de voz respecto al       VAD. El VAD hace un etiquetado coherente, pero el etiquetado manual se corresponde mejor con la percepión humana ya que     en ese caso, el hablante esta acabando una palabra con la letra /o/, de forma muy suave y, por tanto, con muy poca           potencia.
+  * Finalmente, el último fragmento de voz que detecta el VAD, no está etiquetado manualmente. Esto se debe a que ese sonido     es un ruido causado por un golpe en el micrófono. El VAD lo detecta porque sus características estadísticas son             parecidas a las de la voz humana, pero en este caso no es así. 
 
-- Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
+    Como nuestro VAD tampoco es muy sofisticado, una solución hubiese sido etiquetar este ruido para que se correspondiera       con el resultado automático, pero creemos que estas diferencias son una buena forma de demostrar los fallos fáciles que     puede tener un VAD con estas características.
+  
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
