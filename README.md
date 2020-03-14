@@ -134,7 +134,7 @@ Ejercicios
   
   El código completo se encuentra en esta misma branca del repositorio. En cuanto al algoritmo de detección, hemos sido tan
   fieles a la explicación proporcionada por el profesor como nos ha sido posible. Es decir, hemos implementado la máquina de 
-  estados que viene implementada en las páginas 4, 5, y 6 del archivo _**p2_vad.pdf**_.
+  estados que viene descrita en las páginas 4, 5, y 6 del archivo _**p2_vad.pdf**_.
   
   En lo que respecta al nivel de interferencia del ruido de fondo, nuestra elección de diseño consiste en calcularlo a partir
   de la media de las potencias en decibelios de las N primeras tramas, consideradas como estado inicial y en el cual hay
