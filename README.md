@@ -206,6 +206,14 @@ Ejercicios
   * Duración máxima de maybe voice
   
   (foto3)
+  
+  Para facilitar la edición del docopt, hicimos un comando que automáticamente realiza todos los pasos necesarios que hay que
+  realizar:
+  rm -r bin
+  rm src/vad.docopt.h
+  meson bin
+  docopt_c/docopt_c.py src/vad.docopt -o src/vad.docopt.h
+  ninja -C bin
 
 
 ### Contribuciones adicionales y/o comentarios acerca de la práctica
