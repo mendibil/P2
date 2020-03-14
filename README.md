@@ -124,7 +124,7 @@ Ejercicios
 	
 	  La evolución de cruces por cero no resulta muy útil para la detección de voz en general, en cambio, en el caso 	   específico de las consonantes fricativas como /s/ y /x/ si que es una muy buena herramienta.
 	  
-	  Los cruces mantienen un nivel bastante constante con poca varianza, excepto en el caso de las mencionadas 		  fricativas, donde la tasa de cruces por cero se dispara. Estas consonantes son pronunciadas con un nivel de 		  potencia muy bajo, por lo que contar con la información de esta tasa nos es muy útil para no detectar como 		  silencio un fragmento que realmente es de voz.
+	  Los cruces mantienen un nivel bastante constante (alrededor de 500) con poca varianza, excepto en el caso de las 	     mencionadas fricativas, donde la tasa de cruces por cero se dispara, por encima de los 1500. Estas consonantes son 	  pronunciadas con un nivel de potencia muy bajo, por lo que contar con la información de esta tasa nos es muy útil 	      para no detectar como silencio un fragmento que realmente es de voz.
 
 
 ### Desarrollo del detector de actividad vocal
@@ -132,7 +132,27 @@ Ejercicios
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
   
-  El código completo se encuentra en esta misma branca del repositorio.
+  El código completo se encuentra en esta misma branca del repositorio. En cuanto al algoritmo de detección, hemos sido tan
+  fieles a la explicación proporcionada por el profesor como nos ha sido posible. Es decir, hemos implementado la máquina de 
+  estados que viene implementada en las páginas 4, 5, y 6 del archivo p2_vad.pdf.
+  
+  En lo que respecta al nivel de interferencia del ruido de fondo, nuestra elección de diseño consiste en calcularlo a partir
+  de la media de las potencias en decibelios de las N primeras tramas, consideradas como estado inicial y en el cual hay
+  silencio.
+  
+  También hemos utilizado dos umbrales de decisión distintos, para conseguir una funcionalidad explicada en la página 7 del 
+  archivo p2_vad.pdf.
+  
+  Las características de la señal que hemos utilizado para implementar nuestro algoritmo son las siguientes:
+  * Potencia del tramo de señal, en dB, con dos umbrales distintos.
+  * Tasa de cruces por cero (zcr), para discernir las consonantes fricativas (/s/, /x/).
+  * Duración mínima de silencio.
+  * Duración mínima de voz.
+  * Duración mínima de maybe silence.
+  * Duración mínima de maybe voice.
+  No hemos tenido en cuenta la amplitud media ya que hemos considerado que, al tener una forma muy parecida a la potencia no
+  aportaría demasiado al algoritmo.
+  
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
@@ -145,7 +165,7 @@ Ejercicios
   
   * A partir de la tercera etiqueta, vemos que el VAD detecta un pequeño fragmento de silencio donde nosotros habíamos 	         marcado voz. Esto se debe a que ese fragmento de voz se corresponde a una pausa entre palabras que nosotros no               consideramos como un fragmento de silencio, pero el VAD sí que lo detecta ya que para mejorar la puntuación-F, los           resultados eran mejores considerando una duración mínima menor de los fragmentos de silencio.
   * Sobre el segundo 12" del audio, se puede observar como el etiquetado manual alarga más el fragmento de voz respecto al       VAD. El VAD hace un etiquetado coherente, pero el etiquetado manual se corresponde mejor con la percepión humana ya que     en ese caso, el hablante esta acabando una palabra con la letra /o/, de forma muy suave y, por tanto, con muy poca           potencia.
-  * Finalmente, el último fragmento de voz que detecta el VAD, no está etiquetado manualmente. Esto se debe a que ese sonido     es un ruido causado por un golpe en el micrófono. El VAD lo detecta porque sus características estadísticas son             parecidas a las de la voz humana, pero en este caso no es así. 
+  * Finalmente, el último fragmento de voz que detecta el VAD, no está etiquetado manualmente. Esto se debe a que ese sonido     es un ruido causado por un golpe en el micrófono. El VAD lo detecta porque sus características estadísticas son             parecidas a las de la voz humana, concretamente a las de una consonante fricativa, pero en este caso no es así. 
 
   Como nuestro VAD tampoco es muy sofisticado, una solución hubiese sido etiquetar este ruido para que se correspondiera       con el resultado automático, pero creemos que estas diferencias son una buena forma de demostrar los fallos fáciles que     puede tener un VAD con estas características.
   
@@ -153,6 +173,12 @@ Ejercicios
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
+  
+  Como podemos observar, hemos obtenido un resultado TOTAL de las medidas-F de XX.XXX%, lo cual puede ser considerado como un
+  resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el wavesurfer los labels
+  generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
+  
+  (foto)
 
 
 ### Trabajos de ampliación
@@ -162,11 +188,15 @@ Ejercicios
 - Si ha desarrollado el algoritmo para la cancelación de los segmentos de silencio, inserte una gráfica en
   la que se vea con claridad la señal antes y después de la cancelación (puede que `wavesurfer` no sea la
   mejor opción para esto, ya que no es capaz de visualizar varias señales al mismo tiempo).
+  
+  (foto)
 
 #### Gestión de las opciones del programa usando `docopt_c`
 
 - Si ha usado `docopt_c` para realizar la gestión de las opciones y argumentos del programa `vad`, inserte
   una captura de pantalla en la que se vea el mensaje de ayuda del programa.
+  
+  (foto)
 
 
 ### Contribuciones adicionales y/o comentarios acerca de la práctica
