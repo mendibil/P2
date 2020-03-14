@@ -98,13 +98,23 @@ Ejercicios
 - Etiquete manualmente los segmentos de voz y silencio del fichero grabado al efecto. Inserte, a 
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
+  
+  <img src="img/wave.jpeg" width="640" align="center">
 
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para estar
       seguros de que un segmento de señal se corresponde con voz.
-
+      
+      	Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
+      		+ -42 dB en silencio.
+		+ -29.9 dB en consonantes fricativas /s/.
+		+ -25 dB en consonantes sonoras /m/, /n/.
+		+ -20 dB aproximadamente, promediando las estadisticas de fragmentos vocales de todo el audio.
+		
+	Con estos datos, podríamos considerar como un buen incremento de nivel de potencia inicial unos 10 dB.
+		
 	* Duración mínima razonable de los segmentos de voz y silencio.
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
