@@ -29,6 +29,12 @@ sub read_lab {
     my @data = ();
     my $filename = shift;
     my $t_old = 0;
+
+
+
+
+
+
     open(IN, $filename) or die "Error opening input file: $filename\n";
     while (<IN>) {
 	chomp;
@@ -120,14 +126,60 @@ sub print_statistics {
 	$beta = 1. / 2.;
 	my $F_S = (1. + $beta ** 2) * $recaS * $precS / ($eps + $recaS + $beta ** 2 * $precS);
 
-	printf "Recall V:%6.2f/%-6.2f%6.2f%%   Precision V:%6.2f/%-6.2f%6.2f%%   F-score V (2)  :%6.2f%%\n", 
-		$VV, $VV + $VS, $recaV, $VV, $VV + $SV, $precV, $F_V;
 
-	printf "Recall S:%6.2f/%-6.2f%6.2f%%   Precision S:%6.2f/%-6.2f%6.2f%%   F-score S (1/2):%6.2f%%\n", 
-		$SS, $SS + $SV, $recaS, $SS, $SS + $VS, $precS, $F_S;
 
-    printf "===> %s: %.3f%%\n", $filename, ($F_V * $F_S) ** (1. / 2.);
-    print "\n";
+
+
+
+	# OJO!!!!!!!!!!!!!!!!! AQUI HE TOCAT JO!!!!!!!!!!!!!!!!!!! PER TORNAR ENRERE SIMPLEMENT BORRAR LES ALMOHADILLES1
+
+
+
+
+
+
+
+
+	#printf "Recall V:%6.2f/%-6.2f%6.2f%%   Precision V:%6.2f/%-6.2f%6.2f%%   F-score V (2)  :%6.2f%%\n", 
+	#	$VV, $VV + $VS, $recaV, $VV, $VV + $SV, $precV, $F_V;
+	#
+	#printf "Recall S:%6.2f/%-6.2f%6.2f%%   Precision S:%6.2f/%-6.2f%6.2f%%   F-score S (1/2):%6.2f%%\n", 
+	#	$SS, $SS + $SV, $recaS, $SS, $SS + $VS, $precS, $F_S;
+	#
+    printf "===> %s: \t %.3f%%\n", $filename, ($F_V * $F_S) ** (1. / 2.);
+
+
+
+
+
+
+
+
+
+
+
+	################Afegit per mi
+	use warnings;
+	open(my $fh, '>>', 'sortida.txt');
+	my $score_total =($F_V * $F_S) ** (1. /2);
+	print $fh "\t===> $filename: \t" .($F_V * $F_S) ** (1. /2). "\n";
+	close $fh;
+###################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+    #print "\n";
 }
 
 # Add the statistics table of one file to the global statistics.
@@ -226,14 +278,28 @@ foreach my $filelab (@ARGV) {
     die "VAD file not found: $filevad\n" 
 	unless -f $filevad;
 
-    print "**************** $filelab ****************\n";
+
+
+
+
+
+#treure almohadilles
+
+    ###############print "**************** $filelab ****************\n";
     my %statistics = compare_labs($filelab, $filevad);
-    print_statistics(\%statistics, $filelab);
+    #############print_statistics(\%statistics, $filelab);
     acum_statistics(\%acum_statistics, \%statistics);
 }
 
 if (@ARGV > 1) {
-    print "**************** Summary ****************\n";
+
+
+
+
+
+
+	
+    #print "**************** Summary ****************\n";
     print_statistics(\%acum_statistics, 'TOTAL');
 }
 
