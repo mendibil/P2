@@ -107,7 +107,7 @@ Ejercicios
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para estar
       seguros de que un segmento de señal se corresponde con voz.
       
-      	  Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
+     Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
       		
 		+ -42 dB en silencio.
 		+ -29.9 dB en consonantes fricativas sordas /s/.
@@ -231,11 +231,11 @@ Ejercicios
   que realizar:
   
   ```.sh
-  	rm -r bin
-	rm src/vad.docopt.h
-	meson bin
-	docopt_c/docopt_c.py src/vad.docopt -o src/vad.docopt.h
-	ninja -C bin
+  rm -r bin
+  rm src/vad.docopt.h
+  meson bin
+  docopt_c/docopt_c.py src/vad.docopt -o src/vad.docopt.h
+  ninja -C bin
   ```
 
 
