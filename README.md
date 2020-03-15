@@ -187,10 +187,10 @@ Ejercicios
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
   
-  Como podemos observar, hemos obtenido un resultado `TOTAL` de las medidas-F de **XX.XXX%**, lo cual puede ser considerado
+  Como podemos observar, hemos obtenido un resultado `TOTAL` de las medidas-F de **94.948%**, lo cual puede ser considerado
   como un resultado bastante bueno :smiley:. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el `wavesurfer` los labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
   
-  (foto1)
+  <img src="img/resultado.png" width="700" align="center">
 
 
 ### Trabajos de ampliación
@@ -218,6 +218,8 @@ Ejercicios
   * Duración mínima de señal de voz
   * Duración máxima de maybe silence
   * Duración máxima de maybe voice
+  
+  Nótese que los parámetros *alpha1* y *alpha2* que sirven para marcar los umbrales de potencia, deben introducirse multiplicados por 100 para conseguir una mayor exactitud a la hora de iterar con el script. Por ejemplo, `-a 652` dará a *alpha1* un valor de **6.52**.
   
   `bin/vad`
   
