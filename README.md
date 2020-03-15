@@ -249,25 +249,24 @@ Ejercicios
   de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de `run_vad.sh`,
   asignando cada vez un valores distintos a los parámetros. También modificamos parte del script `vad_evaluation.pl` para que solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo todo mejor organizado.
   
-  (foto4)
+  <img src="img/foto4i5.png" align="center">
   
   Al principio, tuvimos un problema y es que, en alguna de las ejecuciones, de manera totalmente aleatoria, daba error al
   abrir alguno de los ficheros de audio. Este problema es bien conocido por nuestro profesor, y parece que no se conoce muy
   bien su procedencia.
   
-  (foto5)
   
   Una primera solución que ideamos fue la de escribir otro script que ejecutara este primer script
   contínuamente hasta que diera un resultado exitoso, con la esperanza de que en alguna de las ejecuciones no ocurriría el
   error aleatorio:
   
-  (foto6)
+ <img src="img/foto6.png" align="center">
   
   Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a `vad_evaluation.pl`
   en caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros 
   sino que lo retomábamos desde el sitio donde había surgido el error.
   
-  (foto7)
+  <img src="img/foto7.png" align="center">
   
   Así pues, conseguimos finalmente una manera de ejecutar en bucle el programa, cambiando automáticamente los parámetros en
   cada ejecución y sin errores, para poder obtener los valores óptimos de cada parámetro
