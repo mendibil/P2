@@ -125,10 +125,23 @@ Ejercicios
 	  La evolución de cruces por cero no resulta muy útil para la detección de voz en general, en cambio, en el caso 	   específico de las consonantes fricativas como /s/ y /x/ si que es una muy buena herramienta.
 	  
 	  Los cruces mantienen un nivel bastante constante (alrededor de 500) con poca varianza, excepto en el caso de las 	     mencionadas fricativas, donde la tasa de cruces por cero se dispara, por encima de los 1500. Estas consonantes son 	  pronunciadas con un nivel de potencia muy bajo, por lo que contar con la información de esta tasa nos es muy útil 	      para no detectar como silencio un fragmento que realmente es de voz.
+	  
+	* Visualización de la transcripción
+	  
+	Con la ayuda de *less* o *cat* podemos visualizar una lista de las etiquetas creadas para un archivo de audio, 		viendo en que intervalo se han asignado y su correspondiente etiqueta.
+	
+	**Visualización de etiquetas con less:**
+	<img src="img/less.png" width="640" align="center">
+	
+	**Visualización de etiquetas con cat:**
+	<img src="img/cat.png" width="640" align="center">
+	
 
 
 ### Desarrollo del detector de actividad vocal
 
+  Para poder mantener el código del proyecto hemos usado meson y ninja. Una vez creado el fichero **meson.build** para 	       seleccionar que ficheros queremos mantener, ejecutamos `meson bin`, que nos configura el directorio **bin**. Ejecutamos     ninja `ninja -C bin` para compilar el programa. Una vez compilado ya tenemos el nuestro programa ejecutable que se           ejecutará con `bin/vad`.
+  
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
   
@@ -136,20 +149,18 @@ Ejercicios
   fieles a la explicación proporcionada por el profesor como nos ha sido posible. Es decir, hemos implementado la máquina de 
   estados que viene descrita en las páginas 4, 5, y 6 del archivo _**p2_vad.pdf**_.
   
-  En lo que respecta al nivel de interferencia del ruido de fondo, nuestra elección de diseño consiste en calcularlo a partir
-  de la media de las potencias en decibelios de las N primeras tramas, consideradas como estado inicial y en el cual hay
-  silencio.
+  En lo que respecta al nivel de interferencia del ruido de fondo, nuestra elección de diseño consiste en calcularlo a         partir de la media de las potencias en decibelios de las N primeras tramas, consideradas como estado inicial y en el cual hay silencio.
   
-  También hemos utilizado dos umbrales de decisión distintos, para conseguir una funcionalidad explicada en la página 7 del 
-  archivo _**p2_vad.pdf**_.
+  También hemos utilizado dos umbrales de decisión distintos, para conseguir una funcionalidad basada en histéresis explicada en la página 7 del archivo _**p2_vad.pdf**_.
   
-  Las características de la señal que hemos utilizado para implementar nuestro algoritmo son las siguientes:
+  Las características de la señal que hemos aprovechado para implementar nuestro algoritmo son las siguientes:
   * Potencia del tramo de señal, en dB, con dos umbrales distintos.
-  * Tasa de cruces por cero (zcr), para discernir las consonantes fricativas (/s/, /x/).
+  * Tasa de cruces por cero (zcr), para discernir las consonantes fricativas (/s/ y /x/, por ejemplo).
   * Duración mínima de silencio.
   * Duración mínima de voz.
   * Duración máxima de maybe silence.
   * Duración máxima de maybe voice.
+  
   No hemos tenido en cuenta la amplitud media ya que hemos considerado que, al tener una forma muy parecida a la potencia no
   aportaría demasiado al algoritmo.
   
@@ -175,8 +186,7 @@ Ejercicios
   el resumen).
   
   Como podemos observar, hemos obtenido un resultado `TOTAL` de las medidas-F de **XX.XXX%**, lo cual puede ser considerado
-  como un resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el `wavesurfer` los 
-  labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
+  como un resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el `wavesurfer` los labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
   
   (foto1)
 
@@ -189,9 +199,11 @@ Ejercicios
   la que se vea con claridad la señal antes y después de la cancelación (puede que `wavesurfer` no sea la
   mejor opción para esto, ya que no es capaz de visualizar varias señales al mismo tiempo).
   
-  (foto2)
+  En el caso de la imagen, el audio original tiene un ruido de fondo bastante notable ya que fue grabado durante una sesión de laboratorio. Podemos ver como, en el audio resultante, la cancelación de ruido en los segmentos de silencio funciona de manera eficiente y se conservan perfectamente los segmentos de voz. 
+  
+  <img src="img/silencio-ceros.png" width="640" align="center">
 
-#### Gestión de las opciones del programa usando `docopt_c`
+#### Gestión de las opciones del programa usando `docopt_c` 
 
 - Si ha usado `docopt_c` para realizar la gestión de las opciones y argumentos del programa `vad`, inserte
   una captura de pantalla en la que se vea el mensaje de ayuda del programa.
@@ -205,7 +217,9 @@ Ejercicios
   * Duración máxima de maybe silence
   * Duración máxima de maybe voice
   
-  (foto3)
+  <img src="img/docopt.png" width="640" align="center">
+  
+  <img src="img/docopt-2.png" width="640" align="center">
   
   Para facilitar la edición del `docopt`, hicimos un comando que automáticamente ejecuta todos los pasos necesarios que hay 
   que realizar:
@@ -225,8 +239,7 @@ Ejercicios
   
   Encontrar el valor óptimo de los 7 parámetros que hemos decidido utilizar sería un quebradero de cabeza. Con la finalidad
   de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de `run_vad.sh`,
-  asignando cada vez un valores distintos a los parámetros. También modificamos parte del script `vad_evaluation.pl` para que
-  solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo todo mejor organizado.
+  asignando cada vez un valores distintos a los parámetros. También modificamos parte del script `vad_evaluation.pl` para que solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo todo mejor organizado.
   
   (foto4)
   
@@ -242,8 +255,7 @@ Ejercicios
   
   (foto6)
   
-  Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma
-  idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a `vad_evaluation.pl`
+  Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a `vad_evaluation.pl`
   en caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros 
   sino que lo retomábamos desde el sitio donde había surgido el error.
   
