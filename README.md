@@ -169,7 +169,7 @@ Ejercicios
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
   
-  <img src="img/manual-vs-vad.jpeg" width="640" align="center">
+  <img src="manual-vs-vad.png">
 
 - Explique, si existen, las discrepancias entre el etiquetado manual y la detección automática.
   
