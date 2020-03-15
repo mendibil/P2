@@ -129,9 +129,11 @@ Ejercicios
 	* Visualización de la transcripción
 	  	Con la ayuda de *less* o *cat* podemos visualizar una lista de las etiquetas creadas para un archivo de audio, 		viendo en que intervalo se han asignado y su correspondiente etiqueta.
 		**Visualización de etiquetas con *less*:**
-		<img src="img/less.png" width="400" align="center">
+		
+	<img src="img/less.png" width="400" align="center">
 		**Visualización de etiquetas con *cat*:**
-		<img src="img/cat.png" width="640" align="center">
+		
+	<img src="img/cat.png" width="640" align="center">
 	
 
 
