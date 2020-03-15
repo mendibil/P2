@@ -109,10 +109,10 @@ Ejercicios
       
      Primero de todo, analizamos la potencia media en fragmentos concretos de nuestro audio.
       		
-		+ -42 dB en silencio.
-		+ -29.9 dB en consonantes fricativas sordas /s/.
-		+ -25 dB en consonantes sonoras /m/, /n/.
-		+ -20 dB aproximadamente, promediando las estadisticas de fragmentos vocales de todo el audio.
+	+ -42 dB en silencio.
+	+ -29.9 dB en consonantes fricativas sordas /s/.
+	+ -25 dB en consonantes sonoras /m/, /n/.
+	+ -20 dB aproximadamente, promediando las estadisticas de fragmentos vocales de todo el audio.
 		
 	  Con estos datos, podríamos considerar como un buen incremento de nivel de potencia inicial unos 10 dB.
 		
@@ -220,11 +220,11 @@ Ejercicios
   
   `bin/vad`
   
-  <img src="img/docopt.png" width="640" align="center">
+  <img src="img/docopt.png" align="center">
   
   `bin/vad --help`
   
-  <img src="img/docopt-2.png" width="640" align="center">
+  <img src="img/docopt-2.png" align="center">
   
   
   Para facilitar la edición del `docopt`, hicimos un comando que automáticamente ejecuta todos los pasos necesarios que hay 
