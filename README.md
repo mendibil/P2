@@ -127,11 +127,14 @@ Ejercicios
 	  Los cruces mantienen un nivel bastante constante (alrededor de 500) con poca varianza, excepto en el caso de las 	     mencionadas fricativas, donde la tasa de cruces por cero se dispara, por encima de los 1500. Estas consonantes son 	  pronunciadas con un nivel de potencia muy bajo, por lo que contar con la información de esta tasa nos es muy útil 	      para no detectar como silencio un fragmento que realmente es de voz.
 	  
 	* Visualización de la transcripción
-	  	Con la ayuda de *less* o *cat* podemos visualizar una lista de las etiquetas creadas para un archivo de audio, 		viendo en que intervalo se han asignado y su correspondiente etiqueta.
-		**Visualización de etiquetas con *less*:**
+	
+	Con la ayuda de *less* o *cat* podemos visualizar una lista de las etiquetas creadas para un archivo de audio, 		viendo en que intervalo se han asignado y su correspondiente etiqueta.
+	
+	**Visualización de etiquetas con *less*:**
 		
 	<img src="img/less.png" width="400" align="center">
-		**Visualización de etiquetas con *cat*:**
+	
+	**Visualización de etiquetas con *cat*:**
 		
 	<img src="img/cat.png" width="640" align="center">
 	
