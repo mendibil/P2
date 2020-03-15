@@ -264,7 +264,7 @@ Ejercicios
   contínuamente hasta que diera un resultado exitoso, con la esperanza de que en alguna de las ejecuciones no ocurriría el
   error aleatorio:
   
- <img src="img/foto6.png" align="center">
+ <img src="img/foto6.png" width="500" align="center">
   
   Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa :sweat_smile:.
   Tomamos esta misma idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a
