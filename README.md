@@ -169,7 +169,7 @@ Ejercicios
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
   
-  <img src="img/manual-vs-vad.jpeg" align="center">
+  <img src="img/manual-vs-vad.jpeg" width="640" align="center">
 
 - Explique, si existen, las discrepancias entre el etiquetado manual y la detección automática.
   
@@ -219,13 +219,17 @@ Ejercicios
   * Duración máxima de maybe voice
   
   `bin/vad`
+  
   <img src="img/docopt.png" width="640" align="center">
   
-  `bin/vad --help
+  `bin/vad --help`
+  
   <img src="img/docopt-2.png" width="640" align="center">
+  
   
   Para facilitar la edición del `docopt`, hicimos un comando que automáticamente ejecuta todos los pasos necesarios que hay 
   que realizar:
+  
   ```.sh
   	rm -r bin
 	rm src/vad.docopt.h
