@@ -253,7 +253,7 @@ Ejercicios
   `vad_evaluation.pl` para que solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo
   todo mejor organizado.
   
-  <img src="img/foto4i5.jpeg" align="center">
+  <img src="img/foto4i5.jpeg" width="700" align="center">
   
   Al principio, tuvimos un problema y es que, en alguna de las ejecuciones, de manera totalmente aleatoria, daba error al
   abrir alguno de los ficheros de audio :sob:. Este problema es bien conocido por nuestro profesor, y parece que no se conoce
