@@ -30,8 +30,10 @@ typedef struct {
    It should return allocated and initialized values of vad_data
 
    sampling_rate: ... the sampling rate */
-VAD_DATA *vad_open(float sampling_rate);
+VAD_DATA * vad_open(  float rate, char *_ALFA_L, char *_ALFA_H, char *_MAX_MS, 
+                      char *_MAX_MV, char *_ZCR_LIFT, char *_MIN_S, char *_MIN_V);
 
+VAD_DATA * vad_open_(float rate);
 /* vad works frame by frame.
    This function returns the frame size so that the program knows how
    many samples have to be provided */

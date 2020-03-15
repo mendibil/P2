@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
   int frame_num;
 
   VAD_DATA *vad_data;
-  VAD_STATE state, last_state;
+  VAD_STATE state, last_state, last_printed_state;
 
   float *buffer, *buffer_zeros, *buffer_out;
   int frame_size;         /* in samples */
@@ -65,45 +65,46 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  vad_data = vad_open(sf_info.samplerate);
+  if(argc <= 7) 
+    vad_data = vad_open_(sf_info.samplerate);
+  else vad_data = vad_open(sf_info.samplerate,  args.alpha1, args.alpha2, args.max_frames_maybe_silence, 
+  args.max_frames_maybe_voice, args.zeros, args.min_frames_silence, args.min_frames_voice);
+
+  
   /* Allocate memory for buffers */
   frame_size   = vad_frame_size(vad_data);
   buffer       = (float *) malloc(frame_size * sizeof(float));
   buffer_zeros = (float *) malloc(frame_size * sizeof(float));
-  buffer_out   = (float *) malloc(frame_size * sizeof(float)*sf_info.frames);
+  buffer_out   = (float *) malloc(frame_size * sizeof(float)*1e3);
   for (int j = 0; j< frame_size; ++j) buffer_zeros[j] = 0.0F;
+
+//Meu main
+//***********
 
   frame_duration = (float) frame_size/ (float) sf_info.samplerate;
   last_state = ST_UNDEF;
 
   frame_num = 0;
-  for (t = last_t = 0; ; t++) { /* For each frame ... */
-    /* End loop when file has finished (or there is an error) */
+  for (t = last_t = 0; ; t++) { // For each frame ... 
+    // End loop when file has finished (or there is an error)
 
     if ((n_read = sf_read_float(sndfile_in, buffer, frame_size)) != frame_size) break;
-    
-    //memcpy(buffer_out + frame_num*frame_size,buffer,frame_size * sizeof(float));
-    
-    /*
-    if (sndfile_out != 0) {
-      // TODO: copy all the samples into sndfile_out 
-    }
-    */
+    if (sndfile_out != 0) memcpy(buffer_out + frame_num*frame_size,buffer,frame_size * sizeof(float));
 
     state = vad(vad_data, buffer);
     if (verbose & DEBUG_VAD) vad_show_state(vad_data, stdout);
 
     if (state != last_state) {
       if (t != last_t) {
-
-        if((last_state == ST_SILENCE || last_state == ST_VOICE) && (state == ST_MAYBE_SILENCE || ST_MAYBE_VOICE)) {
+        if((last_state == ST_SILENCE || last_state == ST_VOICE) && (state == ST_MAYBE_SILENCE || state == ST_MAYBE_VOICE)) {
           start_t = t;
         } else {
           if(last_state == ST_MAYBE_VOICE && state == ST_VOICE) {
+            
             fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, start_t * frame_duration, state2str(ST_SILENCE));
 
             for(int i = 0; i< frame_num; i++) {
-                sf_write_float(sndfile_out,buffer_zeros,frame_size);
+                if (sndfile_out != 0) sf_write_float(sndfile_out,buffer_zeros,frame_size);
             }
             frame_num = 0;
             
@@ -112,9 +113,10 @@ int main(int argc, char *argv[]) {
           
           if(last_state == ST_MAYBE_SILENCE && state == ST_SILENCE){
             fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, start_t * frame_duration, state2str(ST_VOICE));
-            sf_write_float(sndfile_out,buffer_out,frame_size*frame_num);
-            
-            for (i=0; i < sizeof(buffer_out); i++) buffer_out[i] = 0.0F;
+            if (sndfile_out != 0) {
+              sf_write_float(sndfile_out,buffer_out,frame_size*frame_num);
+              for (i=0; i < sizeof(buffer_out); i++) buffer_out[i] = 0.0F;
+            }
 
             frame_num = 0;
             last_t = start_t;
@@ -123,27 +125,25 @@ int main(int argc, char *argv[]) {
       }
       last_state = state;
     }
-
-    if (sndfile_out != 0) { 
-
-
-    }
     frame_num++;
   }
 
+
+
   state = vad_close(vad_data);
-  /* TODO: what do you want to print, for last frames? */
   
-  if (t != last_t && (state == ST_SILENCE || state == ST_VOICE)) {
-    fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(state));
-  } else {
-    fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(ST_SILENCE));
+  if (t != last_t) {
+    if(state == ST_SILENCE) {
+      fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(ST_SILENCE));
+      for(int i = 0; i< frame_num; i++) {
+        if (sndfile_out != 0) sf_write_float(sndfile_out,buffer_zeros,frame_size);
+      }
+    } else {
+      fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(ST_VOICE));
+      if (sndfile_out != 0) sf_write_float(sndfile_out,buffer_out,frame_size*frame_num);
+    }
   }
 
-
-
-
-  /* clean up: free memory, close open files */
   free(buffer);
   free(buffer_zeros);
   free(buffer_out);

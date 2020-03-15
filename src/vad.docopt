@@ -1,7 +1,7 @@
 VAD - Voice Activity Detector
 
 Usage:
-   vad [options] -i <input-wav> -o <output-vad> [-w <output-wav>]
+   vad [options] -i <input-wav> -o <output-vad> [-w <output-wav>] [-a <alpha1>] [-b <alpha2>] [-c <zeros>] [-d <max-frames-maybe-silence>] [-e <max-frames-maybe-voice>] [-f <min-frames-silence>] [-g <min-frames-voice>] 
    vad (-h | --help)
    vad --version
 
@@ -9,6 +9,13 @@ Options:
    -i FILE, --input-wav=FILE   WAVE file for voice activity detection
    -o FILE, --output-vad=FILE  Label file with the result of VAD
    -w FILE, --output-wav=FILE  WAVE file with silences cleared
+   -a FILE, --alpha1=FILE   Enter alpha1
+   -b FILE, --alpha2=FILE   Enter alpha2 
+   -c FILE, --zeros=FILE    Enter zeros
+   -d FILE, --max-frames-maybe-silence=FILE   Enter max-frames-maybe-silence
+   -e FILE, --max-frames-maybe-voice=FILE   Enter max-frames-maybe-voice
+   -f FILE, --min-frames-silence=FILE          Enter min-frames-silence
+   -g FILE, --min-frames-voice=FILE          Enter min-frames-voice
    -v, --verbose  Show debug information
    -h, --help     Show this screen
    --version      Show the version of the project

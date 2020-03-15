@@ -8,14 +8,19 @@
 const float FRAME_TIME        = 10.0F;
 
 //constants a iterar
-const int   MIN_INIT  = 10;
-const int   MIN_V     = 5;
-const int   MIN_S     = 1;    
-const int   MAX_MV    = 6;
-const int   MAX_MS    = 3;
-const int   ZCR_LIFT  = 925;
-const float ALFA_L    = 4.2;
-const float ALFA_H    = 1.6;  
+
+int   MIN_INIT  = 10;
+float ALFA_L    = 99;
+float ALFA_H    = 6; 
+int   ZCR_LIFT  = 1600; 
+int   MAX_MS    = 20;
+int   MAX_MV    = 6;
+int   MIN_S     = 1;   
+int   MIN_V     = 5;
+ 
+
+
+
 
 const char *state_str[] = {
   "UNDEF", "S", "V", "INIT", "MAYBE_S", "MAYBE_V"
@@ -42,19 +47,53 @@ Features compute_features(const float *x, int N, float fm) {
 }
 
 
-VAD_DATA * vad_open(float rate) {
+VAD_DATA * vad_open(  float rate, char *_ALFA_L, char *_ALFA_H, char *_MAX_MS, 
+                      char *_MAX_MV, char *_ZCR_LIFT, char *_MIN_S, char *_MIN_V) { //per poder iterar amb el script
+    VAD_DATA *vad_data = malloc(sizeof(VAD_DATA));
+    vad_data->state = ST_INIT;
+    vad_data->sampling_rate = rate;
+    vad_data->frame_length = rate * FRAME_TIME * 1e-3;
+    vad_data->umbral_1          = 0;
+    vad_data->umbral_2          = 0;
+    vad_data->umbral_zcr        = 0;
+    vad_data->frames_in_maybe_v = 0;
+    vad_data->frames_in_maybe_s = 0;
+    vad_data->frames_in_init    = 0;
+    vad_data->frames_in_s       = 0;
+    vad_data->frames_in_v       = 0;
+    ALFA_L    = (float) strtod(_ALFA_L, NULL) /100;
+    ALFA_H    = (float) strtod(_ALFA_H, NULL) /100;
+    ZCR_LIFT  = (float) strtod(_ZCR_LIFT, NULL);
+    MAX_MS    = atoi(_MAX_MS);
+    MAX_MV    = atoi(_MAX_MV);
+    MIN_S     = atoi(_MIN_S);
+    MIN_V     = atoi(_MIN_V);
+    
+
+    return vad_data;
+}
+
+VAD_DATA * vad_open_(float rate) { //constants fixades per nosaltres
   VAD_DATA *vad_data = malloc(sizeof(VAD_DATA));
-  vad_data->state = ST_INIT;
-  vad_data->sampling_rate = rate;
-  vad_data->frame_length = rate * FRAME_TIME * 1e-3;
-  vad_data->umbral_1 = 0;
-  vad_data->umbral_2 = 0;
-  vad_data->umbral_zcr = 0;
-  vad_data->frames_in_maybe_v = 0;
-  vad_data->frames_in_maybe_s = 0;
-  vad_data->frames_in_init    = 0;
-  vad_data->frames_in_s       = 0;
-  vad_data->frames_in_v       = 0;
+    vad_data->state = ST_INIT;
+    vad_data->sampling_rate = rate;
+    vad_data->frame_length = rate * FRAME_TIME * 1e-3;
+    vad_data->umbral_1          = 0;
+    vad_data->umbral_2          = 0;
+    vad_data->umbral_zcr        = 0;
+    vad_data->frames_in_maybe_v = 0;
+    vad_data->frames_in_maybe_s = 0;
+    vad_data->frames_in_init    = 0;
+    vad_data->frames_in_s       = 0;
+    vad_data->frames_in_v       = 0;
+    ALFA_L    = 6.87;
+    ALFA_H    = 1.95;
+    ZCR_LIFT  = 1630;
+    MAX_MS    = 15;
+    MAX_MV    = 3;
+    MIN_S     = 1;
+    MIN_V     = 1;
+    
   return vad_data;
 }
 
@@ -97,7 +136,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
 
   case ST_SILENCE:
     vad_data->frames_in_s++;
-    if (vad_data->frames_in_s >= MIN_S && (f.p > vad_data->umbral_1 || f.zcr > vad_data->umbral_zcr)) { //DONAVA MILLORS RESULTATS SENSE ZCR
+    if (vad_data->frames_in_s >= MIN_S && (f.p > vad_data->umbral_1)){//} || f.zcr > vad_data->umbral_zcr)) { //DONAVA MILLORS RESULTATS SENSE ZCR
         vad_data->state = ST_MAYBE_VOICE;
         vad_data->frames_in_s = 0;
     }
@@ -116,7 +155,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
     }
     */
 
-    if (f.p < vad_data->umbral_2 && f.zcr < vad_data->umbral_zcr) {
+    if (f.p < vad_data->umbral_2 && f.zcr < vad_data->umbral_zcr) { //ns si acaba destar be el zcr be x fricatives pero altres idk
       vad_data->state = ST_SILENCE;
       vad_data->frames_in_maybe_v = 0;
     } else if(vad_data->frames_in_maybe_v == MAX_MV) {
