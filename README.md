@@ -131,7 +131,8 @@ Ejercicios
 	Con la ayuda de *less* o *cat* podemos visualizar una lista de las etiquetas creadas para un archivo de audio, 		viendo en que intervalo se han asignado y su correspondiente etiqueta.
 	
 	**Visualización de etiquetas con less:**
-	<img src="img/less.png" width="640" align="center">
+	
+	<img src="img/less.png" width="400" align="center">
 	
 	**Visualización de etiquetas con cat:**
 	<img src="img/cat.png" width="640" align="center">
@@ -168,7 +169,7 @@ Ejercicios
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
   
-  <img src="img/manual-vs-vad.jpeg" width="640" align="center">
+  <img src="img/manual-vs-vad.jpeg" align="center">
 
 - Explique, si existen, las discrepancias entre el etiquetado manual y la detección automática.
   
@@ -201,7 +202,7 @@ Ejercicios
   
   En el caso de la imagen, el audio original tiene un ruido de fondo bastante notable ya que fue grabado durante una sesión de laboratorio. Podemos ver como, en el audio resultante, la cancelación de ruido en los segmentos de silencio funciona de manera eficiente y se conservan perfectamente los segmentos de voz. 
   
-  <img src="img/silencio-ceros.png" width="640" align="center">
+  <img src="img/silencio-ceros.png" align="center">
 
 #### Gestión de las opciones del programa usando `docopt_c` 
 
@@ -217,8 +218,10 @@ Ejercicios
   * Duración máxima de maybe silence
   * Duración máxima de maybe voice
   
+  `bin/vad`
   <img src="img/docopt.png" width="640" align="center">
   
+  `bin/vad --help
   <img src="img/docopt-2.png" width="640" align="center">
   
   Para facilitar la edición del `docopt`, hicimos un comando que automáticamente ejecuta todos los pasos necesarios que hay 
