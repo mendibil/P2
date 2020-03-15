@@ -253,7 +253,7 @@ Ejercicios
   `vad_evaluation.pl` para que solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo
   todo mejor organizado.
   
-  <img src="img/foto4i5.png" align="center">
+  <img src="img/foto4i5.jpeg" align="center">
   
   Al principio, tuvimos un problema y es que, en alguna de las ejecuciones, de manera totalmente aleatoria, daba error al
   abrir alguno de los ficheros de audio :sob:. Este problema es bien conocido por nuestro profesor, y parece que no se conoce
@@ -264,7 +264,7 @@ Ejercicios
   contínuamente hasta que diera un resultado exitoso, con la esperanza de que en alguna de las ejecuciones no ocurriría el
   error aleatorio:
   
- <img src="img/foto6.png" width="500" align="center">
+  <img src="img/foto6.png" width="500" align="center">
   
   Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa :sweat_smile:.
   Tomamos esta misma idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a
