@@ -164,7 +164,7 @@ Ejercicios
   * Duración máxima de maybe voice.
   
   No hemos tenido en cuenta la amplitud media ya que hemos considerado que, al tener una forma muy parecida a la potencia no
-  aportaría demasiado al algoritmo.
+  aportaría demasiado al algoritmo :man_shrugging:
   
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
@@ -188,7 +188,7 @@ Ejercicios
   el resumen).
   
   Como podemos observar, hemos obtenido un resultado `TOTAL` de las medidas-F de **XX.XXX%**, lo cual puede ser considerado
-  como un resultado bastante bueno. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el `wavesurfer` los labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
+  como un resultado bastante bueno :smiley:. De hecho, si lo ejecutamos sobre un archivo concreto para visualizar en el `wavesurfer` los labels generados por nuestro programa, visualmente nos parece que todo cuadra muy bien.
   
   (foto1)
 
@@ -245,15 +245,17 @@ Ejercicios
 - Indique a continuación si ha realizado algún tipo de aportación suplementaria (algoritmos de detección o 
   parámetros alternativos, etc.).
   
-  Encontrar el valor óptimo de los 7 parámetros que hemos decidido utilizar sería un quebradero de cabeza. Con la finalidad
-  de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de `run_vad.sh`,
-  asignando cada vez un valores distintos a los parámetros. También modificamos parte del script `vad_evaluation.pl` para que solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo todo mejor organizado.
+  Encontrar el valor óptimo de los 7 parámetros que hemos decidido utilizar sería un quebradero de cabeza :confounded:. Con
+  la finalidad de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de
+  `run_vad.sh`, asignando cada vez un valores distintos a los parámetros. También modificamos parte del script 
+  `vad_evaluation.pl` para que solamente se imprimiera por pantalla el porcentaje `TOTAL`, y de esta manera podíamos tenerlo
+  todo mejor organizado.
   
   <img src="img/foto4i5.png" align="center">
   
   Al principio, tuvimos un problema y es que, en alguna de las ejecuciones, de manera totalmente aleatoria, daba error al
-  abrir alguno de los ficheros de audio. Este problema es bien conocido por nuestro profesor, y parece que no se conoce muy
-  bien su procedencia.
+  abrir alguno de los ficheros de audio :sob:. Este problema es bien conocido por nuestro profesor, y parece que no se conoce
+  muy bien su procedencia.
   
   
   Una primera solución que ideamos fue la de escribir otro script que ejecutara este primer script
@@ -262,14 +264,15 @@ Ejercicios
   
  <img src="img/foto6.png" align="center">
   
-  Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa. Tomamos esta misma idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a `vad_evaluation.pl`
-  en caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el bucle de parámetros 
-  sino que lo retomábamos desde el sitio donde había surgido el error.
+  Sin embargo, dejándolo toda la noche correr, amanecimos y todavía no había habido una ejecución exitosa :sweat_smile:.
+  Tomamos esta misma idea para solamente re-ejecutar la línea de código de run_vad.sh que llama a `bin/vad` y la que llama a
+  `vad_evaluation.pl` en caso de que alguna de estas retornara error. De esta manera, no teníamos que volver a empezar el 
+  bucle de parámetros sino que lo retomábamos desde el sitio donde había surgido el error :+1:.
   
   <img src="img/foto7.png" align="center">
   
   Así pues, conseguimos finalmente una manera de ejecutar en bucle el programa, cambiando automáticamente los parámetros en
-  cada ejecución y sin errores, para poder obtener los valores óptimos de cada parámetro
+  cada ejecución y sin errores, para poder obtener los valores óptimos de cada parámetro.
 
 - Si lo desea, puede realizar también algún comentario acerca de la realización de la práctica que considere
   de interés de cara a su evaluación.
