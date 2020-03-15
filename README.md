@@ -245,6 +245,8 @@ Ejercicios
 - Indique a continuación si ha realizado algún tipo de aportación suplementaria (algoritmos de detección o 
   parámetros alternativos, etc.).
   
+  #### Optimización de parámetros
+  
   Encontrar el valor óptimo de los 7 parámetros que hemos decidido utilizar sería un quebradero de cabeza :confounded:. Con
   la finalidad de agilizar esta optimización, desarrollamos un script que ejecutara en bucle el código contenido dentro de
   `run_vad.sh`, asignando cada vez un valores distintos a los parámetros. También modificamos parte del script 
