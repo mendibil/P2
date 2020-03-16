@@ -280,8 +280,28 @@ Ejercicios
 
 - Si lo desea, puede realizar también algún comentario acerca de la realización de la práctica que considere
   de interés de cara a su evaluación.
-
-
+  
+  #### ALGORITMO ALTERNATIVO
+  
+  Cabe destacar que, además del algoritmo proporcionado, también diseñamos otro que daba mejor puntuación-F `TOTAL`. Sin embargo, presentaba un problema y es que no imprimía las etiquetas de la manera más elegante posible. Este puede ser un ejemplo de lo que imprimía:
+  ```
+  0.00000 0.09000 S
+  0.09000 3.50000 S
+  3.50000 4.80000 V
+  4.80000 5.31000 S
+  ```
+  Como podemos ver, en el tramo 0.00000 hasta 3.50000, que debería estar etiquetado con una sola 'S', aparece dividido en un punto a mitad de tramo. Además, esto generaba problemas a la hora de desarrollar el código para la cancelación de ruido. La puntuación-F `TOTAL` para este algoritmo era muy alta:
+  
+  <img src="img/ALGORITMO2.png" align="center">
+  
+  Sin embargo, debatiendo con el profesor, llegamos a la conclusión de que era mejor el algoritmo que hemos entregado.
+  
+  #### CONCLUSIONES
+  
+  De esta práctica concluimos que desarrollar un algoritmo de detección de voz con mucha precisión no es sencillo. Hay muchas maneras distintas de implementarlo y no se puede saber cuál de ellas dará mejor resultado. Además, hay muchos parámetros a tener en cuenta, y a mayor cantidad de parámetros, mayor será la dificultad computacional de optimizarlos. En nuestro caso, llegar a la puntuación-F `TOTAL` que tenemos ahora requirió de varias noches de nuestros portátiles ejecutando iteraciones :computer::dash:.
+  
+  Personalmente nos ha gustado esta práctica porque hemos podido ir más allá de lo requerido, siguiendo los consejos de nuestro profesor para optimizar los parámetros mediante scripts de bash. Esto era algo que nunca habíamos tocado y nos ha parecido sorprendente la versatilidad y la cantidad de posibilidades que tienen estos scripts con pocas líneas y sin conocer apenas el lenguaje :scream:.
+  
 ### Antes de entregar la práctica
 
 Recuerde comprobar que el repositorio cuenta con los códigos correctos y en condiciones de ser 
